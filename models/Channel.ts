@@ -60,7 +60,7 @@ export default class Channel extends EventEmitter {
             // If the desired number of messages has been reached, resolve the Promise with the results array
             resolve(res);
           }
-          if (AwaitOptions.filter({ Channel: this, Tags: message.Payload.Tags, Content: message.Payload.Content })) {
+          if (AwaitOptions.filter!({ Channel: this, Tags: message.Payload.Tags, Content: message.Payload.Content })) {
             res.push(message);
             count++;
             this.emit('AwaitMessageAdded', (message))
@@ -75,7 +75,7 @@ export default class Channel extends EventEmitter {
         // Set a timeout to resolve the Promise with `undefined` if no messages are received within the specified time
         setTimeout(() => {
           // Only resolve the Promise with `undefined` if the desired number of messages have not yet been received
-          if (count < AwaitOptions.Quantity) {
+          if (count < AwaitOptions.Quantity!) {
             resolve(res.length > 0? res : undefined);
           }
          

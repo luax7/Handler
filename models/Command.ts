@@ -23,7 +23,7 @@ class CommandModel {
 
     Aliases? : Array<string> ;
 
-    Execute : (Args : CallbackArgs) => void = ({}) => {};
+    Execute : (Args : CallbackArgs) => void ;
 }
 
 export {CommandModel, CallbackArgs}
