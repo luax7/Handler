@@ -75,7 +75,7 @@ export default class Channel extends EventEmitter {
         setTimeout(() => {
           // Only resolve the Promise with `undefined` if the desired number of messages have not yet been received
           if (count < AwaitOptions.Quantity) {
-            resolve(undefined);
+            resolve(res.length > 0? res : undefined);
           }
          
           },AwaitOptions.Timestamp)
