@@ -4,6 +4,7 @@ import { CommandModel } from './Command';
 import CommandHandler from '../Handlers/CommandHandler';
 import BaseMessage, { MessagePayload } from './Message';
 import Channel from './Channel';
+import { EventEmitter } from 'stream';
 
 export interface ClientOptions {
     Prefix? : string;
@@ -12,7 +13,7 @@ export interface ClientOptions {
 
 }
 
-export default class pn5 {
+export default class pn5 extends EventEmitter{
 
     public  client!: tmijs.Client;
     public  Options! : ClientOptions;
@@ -21,6 +22,9 @@ export default class pn5 {
 
     
     constructor(Options : ClientOptions,Client : tmijs.Client){
+        super({
+            captureRejections: true
+        })
 
         this.Options = Options;
         this.client = Client
@@ -49,8 +53,7 @@ export default class pn5 {
                     this.commandModules.set(alias, Command);
                 });
             });
-        }
-        
+        } 
         if (Options.CommandsLocale && Options.Prefix) {
             this.client.addListener('message', (channel: string, tags: tmijs.ChatUserstate, Message: string, self: boolean) => {
                 // Use a regular expression to match the command prefix and extract the command name
@@ -69,6 +72,7 @@ export default class pn5 {
                     Tags: tags,
                     Content: Message,
                 });
+                this.emit('CommandExecute', Command.CommandName)
                 // Call the command handler with the command module, the command arguments, and the message
                 CommandHandler(
                     this.Channels.get(channel) as Channel,
@@ -99,6 +103,8 @@ export default class pn5 {
 
             this.Channels.get(channel)?.PostMessage(this.client,payload)
         })
+
+        this.emit('ready', (Date.now()))
 }
     Connect (){
         this.client.connect();
@@ -114,4 +120,3 @@ export default class pn5 {
 
 
 }
-

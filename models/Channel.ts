@@ -63,6 +63,7 @@ export default class Channel extends EventEmitter {
           if (AwaitOptions.filter({ Channel: this, Tags: message.Payload.Tags, Content: message.Payload.Content })) {
             res.push(message);
             count++;
+            this.emit('AwaitMessageAdded', (message))
           }
     
           if (count === AwaitOptions.Quantity) {
@@ -81,6 +82,6 @@ export default class Channel extends EventEmitter {
           },AwaitOptions.Timestamp)
         })
     
-   }
+    }
 }
-  
+    
