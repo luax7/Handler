@@ -1,0 +1,19 @@
+{
+  "name": "np5-twitchhandler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.16",
+    "@types/tmi.js": "^1.8.2"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "tmi.js": "^1.8.5"
+  }
+}
