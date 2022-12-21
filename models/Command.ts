@@ -23,7 +23,15 @@ class CommandModel {
 
     Aliases? : Array<string> ;
 
-    Execute : (Args : CallbackArgs) => void ;
+    Execute : (Args : CallbackArgs) => Promise<void> = (args) => {
+
+        return new Promise<void> ((resolve) => {
+            console.log(`Command not especified : ${__filename} `)
+            resolve()
+
+        })
+
+    };
 }
 
 export {CommandModel, CallbackArgs}

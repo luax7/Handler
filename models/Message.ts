@@ -12,11 +12,10 @@ export default class BaseMessage {
     private Client : tmi.Client;
 
 
-    constructor(Client : tmi.Client, Payload : MessagePayload) {
+    constructor(Client : tmi.Client, Payload : MessagePayload  ) {
 
         this.Client = Client;
         this.Payload = Payload;
-
     }
 
     Reply (Message : string | MessagePayload) : Promise<string[]>{
