@@ -126,16 +126,7 @@
             const chanel = typeof channel === "string" ? channel : channel.Name;
             const content = message;
 
-            return new Promise(async(resolve, reject) => {
-                
-                this.client.say(chanel,content).catch(err => {
-
-                    if(err) reject(false)
-                    resolve(true)
-
-                })
-
-            })
+            return await this.client.say(chanel, content) ? true : false;
 
         }
 
